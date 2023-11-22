@@ -1,5 +1,8 @@
 const propNames = new Set(['id', 'className', 'textContent', 'onclick']);
 
+// Массив случайных кодов, сгенерированных в рамках сессии для соблюдения уникальности
+const randomCodes = []
+
 /**
  * Создание элемента со свойствами и вложенными элементами
  * @param name {String} Название HTML тега
@@ -26,3 +29,15 @@ export function createElement(name, props = {}, ...children) {
 
   return element;
 }
+
+export function codeGen() {
+  let code = Math.floor((Math.random()*1000)+1);
+  while (randomCodes.find((el) => el === code) && randomCodes.length < 1000) {
+    code = Math.floor((Math.random()*10)+1);
+  }
+  randomCodes.push(code);
+  return code;
+}
+
+
+
